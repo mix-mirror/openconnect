@@ -815,7 +815,7 @@ static xmlDocPtr xmlpost_new_query(struct openconnect_info *vpninfo, const char 
 				   xmlNodePtr *rootp)
 {
 	xmlDocPtr doc;
-	xmlNodePtr root, node, capabilities, mac_list;
+	xmlNodePtr root, node, capabilities, mac_list = NULL;
 	struct oc_vpn_option *opt;
 
 	doc = xmlNewDoc(XCAST("1.0"));
