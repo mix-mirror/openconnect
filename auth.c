@@ -815,7 +815,7 @@ static xmlDocPtr xmlpost_new_query(struct openconnect_info *vpninfo, const char 
 				   xmlNodePtr *rootp)
 {
 	xmlDocPtr doc;
-	xmlNodePtr root, node, capabilities;
+	xmlNodePtr root, node, capabilities, mac_list;
 	struct oc_vpn_option *opt;
 
 	doc = xmlNewDoc(XCAST("1.0"));
@@ -852,9 +852,17 @@ static xmlDocPtr xmlpost_new_query(struct openconnect_info *vpninfo, const char 
 		} else if (!strcmp(opt->option, "device_type")) {
 			if (!xmlNewProp(node, XCAST("device_type"), XCAST(opt->value)))
 				goto bad;
-		} else if (!strcmp(opt->option, "device_uniqueid"))
+		} else if (!strcmp(opt->option, "device_uniqueid")) {
 			if (!xmlNewProp(node, XCAST("unique-id"), XCAST(opt->value)))
 				goto bad;
+		} else if (!strcmp(opt->option, "mac_address")) {
+			if (!mac_list) {
+				mac_list = xmlNewTextChild(root, NULL, XCAST("mac-address-list"), NULL);
+				if (!mac_list) goto bad;
+			}
+			if (!xmlNewTextChild(mac_list, NULL, XCAST("mac-address"), XCAST(opt->value)))
+			    goto bad;
+		}
 	}
 
 	capabilities = xmlNewNode(NULL, XCAST("capabilities"));
