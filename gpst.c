@@ -1020,6 +1020,10 @@ static int run_hip_script(struct openconnect_info *vpninfo)
 			hip_argv[i++] = "--client-ipv6";
 			hip_argv[i++] = vpninfo->ip_info.addr6;
 		}
+		if (vpninfo->csd_ticket) {
+			hip_argv[i++] = "--app-version";
+			hip_argv[i++] = vpninfo->csd_ticket;
+		}
 		hip_argv[i++] = "--md5";
 		hip_argv[i++] = vpninfo->csd_token;
 		hip_argv[i++] = "--client-os";
