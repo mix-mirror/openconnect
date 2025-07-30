@@ -2033,11 +2033,9 @@ int main(int argc, char *argv[])
 			read_stdin(&password, 0, 0);
 			allow_stdin_read = 1;
 			break;
-#ifndef _WIN32
 		case OPT_PASSWORD_IN_ENV:
 			password = xstrdup(getenv("PASSWD"));
 			break;
-#endif
 		case OPT_NO_PASSWD:
 			vpninfo->nopasswd = 1;
 			break;
