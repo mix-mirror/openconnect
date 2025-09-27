@@ -37,6 +37,7 @@ Signoff:
 
 static-analyzer/GnuTLS/Fedora:
   stage: static-analysis
+  needs: [] # run immediately
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
   script:
   - ./autogen.sh
@@ -55,6 +56,7 @@ static-analyzer/GnuTLS/Fedora:
 
 static-analyzer/OpenSSL/Fedora:
   stage: static-analysis
+  needs: [] # run immediately
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
   script:
   - ./autogen.sh
@@ -77,6 +79,7 @@ static-analyzer/OpenSSL/Fedora:
 
 Fedora/GnuTLS:
   stage: test-first
+  needs: [] # run immediately
   script:
   - ./autogen.sh
   - ./configure --with-java --disable-dsa-tests --without-gnutls-version-check --enable-ppp-tests CFLAGS=-g
@@ -107,6 +110,7 @@ Fedora/GnuTLS:
 
 Fedora/OpenSSL:
   stage: test-first
+  needs: [] # run immediately
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
   script:
 # Re-enable DSA since we test it
