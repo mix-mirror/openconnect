@@ -77,6 +77,8 @@ static-analyzer/OpenSSL/Fedora:
 
 Fedora/GnuTLS:
   stage: test-first
+  variables:
+    GIT_DEPTH: 500
   script:
   - ./autogen.sh
   - ./configure --with-java --disable-dsa-tests --without-gnutls-version-check --enable-ppp-tests CFLAGS=-g
@@ -108,6 +110,8 @@ Fedora/GnuTLS:
 Fedora/OpenSSL:
   stage: test-first
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
+  variables:
+    GIT_DEPTH: 500
   script:
 # Re-enable DSA since we test it
   - update-crypto-policies --set LEGACY
@@ -315,6 +319,8 @@ CentOS9/OpenSSL:
 
 Fedora/GnuTLS/ibmtss:
   stage: test-rest
+  variables:
+    GIT_DEPTH: 500
   script:
   - ./autogen.sh
   - ./configure --with-java --disable-dsa-tests --without-gnutls-version-check --enable-ppp-tests CFLAGS=-g
@@ -376,6 +382,8 @@ Fedora/GnuTLS/clang:
 Fedora/OpenSSL/clang:
   stage: test-rest
   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
+  variables:
+    GIT_DEPTH: 500
   script:
 # Re-enable DSA since we test it
   - update-crypto-policies --set LEGACY
