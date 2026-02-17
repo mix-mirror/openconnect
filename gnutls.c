@@ -2583,8 +2583,11 @@ int openconnect_init_ssl(void)
 	if (ret)
 		return ret;
 #endif
+
+#if GNUTLS_VERSION_NUMBER < 0x030300
 	if (gnutls_global_init())
 		return -EIO;
+#endif
 
 	return 0;
 }
